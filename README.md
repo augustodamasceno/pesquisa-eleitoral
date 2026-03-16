@@ -13,19 +13,19 @@ Teste técnico abordando conhecimentos em C++
 # Análise de Requisitos  
 
 ## Requisitos Funcionais  
-* **Requisito 1 - Gestão da Base Demográfica:**  O sistema deve sincronizar e armazenar dados atualizados de estados e 
+* **Requisito Funcional 1 - Gestão da Base Demográfica:**  O sistema deve sincronizar e armazenar dados atualizados de estados e 
 municípios brasileiros a partir de uma base externa como o IBGE. A atualização deve ser executada por um serviço mensal 
 ou acionada manualmente pelo usuário. O sistema deve permitir o uso de uma base gerada artificialmente caso a rede externa 
 esteja inacessível.  
 
-* **Requisito 2 - Estratificação Municipal:** A aplicação deve classificar os municípios automaticamente em quatro grupos 
+* **Requisito Funcional 2 - Estratificação Municipal:** A aplicação deve classificar os municípios automaticamente em quatro grupos 
 de porte populacional para fins de cálculo de intenção de votos:
   * Grupo 1: até 20 mil habitantes.
   * Grupo 2: entre 20 mil e 100 mil habitantes.
   * Grupo 3: entre 100 mil e 1 milhão de habitantes.
   * Grupo 4: acima de 1 milhão de habitantes.
 
-* **Requisito 3 - Importação de Pesquisas:** O sistema deve importar arquivos contendo os resultados das entrevistas das 
+* **Requisito Funcional 3 - Importação de Pesquisas:** O sistema deve importar arquivos contendo os resultados das entrevistas das 
 pesquisas eleitorais. A rotina de extração deve mapear obrigatoriamente os seguintes campos: 
   * ID da pesquisas  
   * Data da pesquisa  
@@ -33,11 +33,11 @@ pesquisas eleitorais. A rotina de extração deve mapear obrigatoriamente os seg
   * Estado  
   * Intenção de voto mapeada pelo ID de cada candidato.
 
-* **Requisito 4 - Motor de Cálculo Ponderado:** O sistema deve calcular os percentuais finais de intenção de voto. 
+* **Requisito Funcional 4 - Motor de Cálculo Ponderado:** O sistema deve calcular os percentuais finais de intenção de voto. 
 O algoritmo de cálculo deve aplicar pesos estatísticos às intenções de voto originais, baseando-se na quantidade real 
 de habitantes da região e considerando o Estado e o grupo de porte do município.  
 
-* **Requisitos 5 - Dashboard Temporal:** A aplicação deve consolidar os cálculos e expor os dados em um dashboard 
+* **Requisitos Funcional 5 - Dashboard Temporal:** A aplicação deve consolidar os cálculos e expor os dados em um dashboard 
 simplificado que demonstre a evolução das intenções de votos ao longo do tempo.
 
 ## Requisitos Não Funcionais  

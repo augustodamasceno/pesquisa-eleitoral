@@ -54,7 +54,7 @@ nas APIs ou formatos de dados governamentais.
 
 # Brainstorming  
 
-!(Brainstorming)[docs/img/brainstorming.png]  
+![Brainstorming](docs/img/brainstorming.png)  
 
 # Stack  
 

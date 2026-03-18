@@ -63,3 +63,9 @@ nas APIs ou formatos de dados governamentais.
 * Testes: GoogleTest  
 * Interface Gráfica: Qt6  
 
+# Banco de Dados 
+
+## Schema  
+
+![Schema visualizado com DBeaver](docs/img/db-schema.png)  
+

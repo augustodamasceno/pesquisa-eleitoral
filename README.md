@@ -51,3 +51,15 @@ em diferentes cenários eleitorais.
 * **Requisito Não Funcional 3 - Longevidade e Desacoplamento:** A arquitetura deve prever uso a longo prazo a cada nova eleição, 
 isolando a lógica de requisição e parseamento da base do IBGE para facilitar a manutenção frente a eventuais mudanças 
 nas APIs ou formatos de dados governamentais.  
+
+# Brainstorming  
+
+!(Brainstorming)[docs/img/brainstorming.png]  
+
+# Stack  
+
+* Core: C++17  
+* Banco de Dados: SQLiteCpp   
+* Testes: GoogleTest  
+* Interface Gráfica: Qt6  
+

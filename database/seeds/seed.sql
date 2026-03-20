@@ -5,7 +5,7 @@ PRAGMA foreign_keys=ON;
 CREATE TABLE city (
     id    INTEGER PRIMARY KEY AUTOINCREMENT,
     state CHAR(2)      NOT NULL,
-    name  VARCHAR(64)  NOT NULL, -- Edge Case: Vila Bela da Santa­ssima Trindade (size 32)
+    name  VARCHAR(64)  NOT NULL, -- Edge Case: Vila Bela da SantÃ­ssima Trindade (size 32)
     tier  INTEGER      NOT NULL CHECK (tier BETWEEN 1 AND 4),
     UNIQUE (state, name)
 );
@@ -31,6 +31,7 @@ CREATE TABLE result (
     date         DATE    NOT NULL,
     position     INTEGER NOT NULL,
     votes        INTEGER NOT NULL,
+    proportion   REAL    NOT NULL,
     candidate_id INTEGER NOT NULL REFERENCES candidate(id)
 );
 

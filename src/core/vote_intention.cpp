@@ -21,11 +21,11 @@ VoteIntention::VoteIntention(int id, std::string date, std::string city,
     : id(id), date(std::move(date)), city(std::move(city)),
       state(std::move(state)), candidate_id(candidate_id) {}
 
-void VoteIntention::setId(int value)            { id           = value; }
-void VoteIntention::setDate(std::string value)  { date         = std::move(value); }
-void VoteIntention::setCity(std::string value)  { city         = std::move(value); }
-void VoteIntention::setState(std::string value) { state        = std::move(value); }
-void VoteIntention::setCandidateId(int value)   { candidate_id = value; }
+void VoteIntention::set_id(int value)            { id           = value; }
+void VoteIntention::set_date(std::string value)  { date         = std::move(value); }
+void VoteIntention::set_city(std::string value)  { city         = std::move(value); }
+void VoteIntention::set_state(std::string value) { state        = std::move(value); }
+void VoteIntention::set_candidate_id(int value)   { candidate_id = value; }
 
 bool VoteIntention::operator==(const VoteIntention& other) const {
     return id           == other.id

@@ -107,3 +107,31 @@ TEST_F(CityRepositoryTest, FindByStateEmpty) {
     auto result = repo.find_by_state("AB");
     EXPECT_TRUE(result.empty());
 }
+
+TEST_F(CityRepositoryTest, FindByStateAndName_Found) {
+    pesquisae::core::database::CityRepository repo(*db);
+    repo.insert({0, "SP", "São José dos Campos", 3});
+    repo.insert({0, "RN", "Natal", 4});
+
+    pesquisae::core::database::City found = repo.find_by_state_and_name("SP", "São José dos Campos");
+    EXPECT_EQ(found.state, "SP");
+    EXPECT_EQ(found.name,  "São José dos Campos");
+    EXPECT_EQ(found.tier,  3);
+}
+
+TEST_F(CityRepositoryTest, FindByStateAndName_WrongState) {
+    pesquisae::core::database::CityRepository repo(*db);
+    repo.insert({0, "SP", "São José dos Campos", 3});
+
+    // Same name, different state — must not be found.
+    EXPECT_THROW(
+        repo.find_by_state_and_name("RN", "São José dos Campos"),
+        std::runtime_error);
+}
+
+TEST_F(CityRepositoryTest, FindByStateAndName_NotFound) {
+    pesquisae::core::database::CityRepository repo(*db);
+    EXPECT_THROW(
+        repo.find_by_state_and_name("SP", "Nonexistent City"),
+        std::runtime_error);
+}

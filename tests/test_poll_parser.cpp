@@ -21,31 +21,31 @@ TEST(PollParserTest, GoodFile_RecordCount) {
 TEST(PollParserTest, GoodFile_FirstRecord) {
     pesquisae::core::poll::PollParser parser(TEST_RESOURCES_DIR "/poll_good.txt");
     const auto& vi = parser.get_vote_intentions()[0];
-    EXPECT_EQ(vi.getId(),          1);
-    EXPECT_EQ(vi.getDate(),        "2026-03-01");
-    EXPECT_EQ(vi.getCity(),        "Sao José dos Campos");
-    EXPECT_EQ(vi.getState(),       "SP");
-    EXPECT_EQ(vi.getCandidateId(), 10);
+    EXPECT_EQ(vi.get_id(),          1);
+    EXPECT_EQ(vi.get_date(),        "2026-03-01");
+    EXPECT_EQ(vi.get_city(),        "Sao José dos Campos");
+    EXPECT_EQ(vi.get_state(),       "SP");
+    EXPECT_EQ(vi.get_candidate_id(), 10);
 }
 
 TEST(PollParserTest, GoodFile_SecondRecord) {
     pesquisae::core::poll::PollParser parser(TEST_RESOURCES_DIR "/poll_good.txt");
     const auto& vi = parser.get_vote_intentions()[1];
-    EXPECT_EQ(vi.getId(),          2);
-    EXPECT_EQ(vi.getDate(),        "2026-03-02");
-    EXPECT_EQ(vi.getCity(),        "Natal");
-    EXPECT_EQ(vi.getState(),       "RN");
-    EXPECT_EQ(vi.getCandidateId(), 11);
+    EXPECT_EQ(vi.get_id(),          2);
+    EXPECT_EQ(vi.get_date(),        "2026-03-02");
+    EXPECT_EQ(vi.get_city(),        "Natal");
+    EXPECT_EQ(vi.get_state(),       "RN");
+    EXPECT_EQ(vi.get_candidate_id(), 11);
 }
 
 TEST(PollParserTest, GoodFile_ThirdRecord) {
     pesquisae::core::poll::PollParser parser(TEST_RESOURCES_DIR "/poll_good.txt");
     const auto& vi = parser.get_vote_intentions()[2];
-    EXPECT_EQ(vi.getId(),          3);
-    EXPECT_EQ(vi.getDate(),        "2026-03-15");
-    EXPECT_EQ(vi.getCity(),        "Recife");
-    EXPECT_EQ(vi.getState(),       "PE");
-    EXPECT_EQ(vi.getCandidateId(), 12);
+    EXPECT_EQ(vi.get_id(),           3);
+    EXPECT_EQ(vi.get_date(),         "2026-03-15");
+    EXPECT_EQ(vi.get_city(),         "Recife");
+    EXPECT_EQ(vi.get_state(),        "PE");
+    EXPECT_EQ(vi.get_candidate_id(), 12);
 }
 
 // Malformed file: record 2 has a non-integer
@@ -57,21 +57,21 @@ TEST(PollParserTest, MalformedFile_OnlyValidRecordsStored) {
 TEST(PollParserTest, MalformedFile_FirstValidRecord) {
     pesquisae::core::poll::PollParser parser(TEST_RESOURCES_DIR "/poll_malformed.txt");
     const auto& vi = parser.get_vote_intentions()[0];
-    EXPECT_EQ(vi.getId(),          1);
-    EXPECT_EQ(vi.getDate(),        "2026-03-01");
-    EXPECT_EQ(vi.getCity(),        "Sao José dos Campos");
-    EXPECT_EQ(vi.getState(),       "SP");
-    EXPECT_EQ(vi.getCandidateId(), 10);
+    EXPECT_EQ(vi.get_id(),           1);
+    EXPECT_EQ(vi.get_date(),         "2026-03-01");
+    EXPECT_EQ(vi.get_city(),         "Sao José dos Campos");
+    EXPECT_EQ(vi.get_state(),        "SP");
+    EXPECT_EQ(vi.get_candidate_id(), 10);
 }
 
 TEST(PollParserTest, MalformedFile_SecondValidRecord) {
     pesquisae::core::poll::PollParser parser(TEST_RESOURCES_DIR "/poll_malformed.txt");
     const auto& vi = parser.get_vote_intentions()[1];
-    EXPECT_EQ(vi.getId(),          3);
-    EXPECT_EQ(vi.getDate(),        "2026-03-15");
-    EXPECT_EQ(vi.getCity(),        "Recife");
-    EXPECT_EQ(vi.getState(),       "PE");
-    EXPECT_EQ(vi.getCandidateId(), 12);
+    EXPECT_EQ(vi.get_id(),           3);
+    EXPECT_EQ(vi.get_date(),         "2026-03-15");
+    EXPECT_EQ(vi.get_city(),         "Recife");
+    EXPECT_EQ(vi.get_state(),        "PE");
+    EXPECT_EQ(vi.get_candidate_id(), 12);
 }
 
 

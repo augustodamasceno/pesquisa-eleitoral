@@ -16,11 +16,10 @@ namespace pesquisae::core::database {
 
 void VoteRepository::insert(const Vote& v) {
     SQLite::Statement q(_db,
-        "INSERT INTO vote (id, date, city_id, candidate_id) VALUES (?, ?, ?, ?)");
-    q.bind(1, v.id);
-    q.bind(2, v.date);
-    q.bind(3, v.city_id);
-    q.bind(4, v.candidate_id);
+        "INSERT INTO vote (date, city_id, candidate_id) VALUES (?, ?, ?)");
+    q.bind(1, v.date);
+    q.bind(2, v.city_id);
+    q.bind(3, v.candidate_id);
     q.exec();
 }
 

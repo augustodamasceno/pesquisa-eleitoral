@@ -22,17 +22,17 @@ public:
 
     VoteIntention(int id, std::string date, std::string city,
                   std::string state, int candidate_id);
-    int                getId()          const { return id; }
-    const std::string& getDate()        const { return date; }
-    const std::string& getCity()        const { return city; }
-    const std::string& getState()       const { return state; }
-    int                getCandidateId() const { return candidate_id; }
+    int                get_id()          const { return id; }
+    const std::string& get_date()        const { return date; }
+    const std::string& get_city()        const { return city; }
+    const std::string& get_state()       const { return state; }
+    int                get_candidate_id() const { return candidate_id; }
 
-    void setId(int value);
-    void setDate(std::string value);
-    void setCity(std::string value);
-    void setState(std::string value);
-    void setCandidateId(int value);
+    void set_id(int value);
+    void set_date(std::string value);
+    void set_city(std::string value);
+    void set_state(std::string value);
+    void set_candidate_id(int value);
 
     bool operator==(const VoteIntention& other) const;
     bool operator!=(const VoteIntention& other) const;

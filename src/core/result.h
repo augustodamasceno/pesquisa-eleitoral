@@ -16,9 +16,10 @@ namespace pesquisae::core::database {
 
 struct Result {
     int         id           = 0;
-    std::string date;        
+    std::string date;
     int         position     = 0;
-    int         votes        = 0;
+    int         votes        = 0;  
+    double      proportion   = 0.0; 
     int         candidate_id = 0;
 };
 

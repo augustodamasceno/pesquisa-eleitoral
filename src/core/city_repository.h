@@ -31,6 +31,7 @@ public:
     void remove(int id) override;
 
     std::vector<City> find_by_state(const std::string& state);
+    City find_by_state_and_name(const std::string& state, const std::string& name);
     void upsert_all(const std::vector<City>& cities);
 
 private:

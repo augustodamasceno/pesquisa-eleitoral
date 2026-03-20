@@ -54,6 +54,18 @@ std::vector<City> CityRepository::find_by_state(const std::string& state) {
     return result;
 }
 
+City CityRepository::find_by_state_and_name(const std::string& state,
+                                             const std::string& name) {
+    SQLite::Statement q(_db,
+        "SELECT id, state, name, tier FROM city WHERE state = ? AND name = ?");
+    q.bind(1, state);
+    q.bind(2, name);
+    if (q.executeStep())
+        return { q.getColumn(0), q.getColumn(1),
+                 q.getColumn(2), q.getColumn(3) };
+    throw std::runtime_error("City not found: " + state + "/" + name);
+}
+
 std::vector<City> CityRepository::find_all() {
     SQLite::Statement q(_db,
         "SELECT id, state, name, tier FROM city");

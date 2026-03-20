@@ -46,6 +46,7 @@ add_library(core STATIC
     src/core/candidate_repository.cpp
     src/core/city_repository.cpp
     src/core/result_repository.cpp
+    src/core/result_processor.cpp
     src/core/vote_repository.cpp
     src/core/ibge_demographic.cpp
     src/core/vote_intention.cpp

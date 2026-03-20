@@ -18,6 +18,8 @@
 #include "irepository.h"
 #include "city.h"
 
+namespace pesquisae::core::database {
+
 class CityRepository : public IRepository<City> {
 public:
     explicit CityRepository(SQLite::Database& db) : _db(db) {}
@@ -29,7 +31,10 @@ public:
     void remove(int id) override;
 
     std::vector<City> find_by_state(const std::string& state);
+    void upsert_all(const std::vector<City>& cities);
 
 private:
     SQLite::Database& _db;
 };
+
+} // namespace pesquisae::core::database

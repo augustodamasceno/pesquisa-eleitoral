@@ -18,6 +18,8 @@
 #include "irepository.h"
 #include "result.h"
 
+namespace pesquisae::core::database {
+
 class ResultRepository : public IRepository<Result> {
 public:
     explicit ResultRepository(SQLite::Database& db) : _db(db) {}
@@ -34,3 +36,5 @@ public:
 private:
     SQLite::Database& _db;
 };
+
+} // namespace pesquisae::core::database

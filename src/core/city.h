@@ -12,9 +12,13 @@
 #include <string>
 
 
+namespace pesquisae::core::database {
+
 struct City {
     int         id    = 0;
     std::string state;       
     std::string name;        
     int         tier  = 0;
 };
+
+} // namespace pesquisae::core::database

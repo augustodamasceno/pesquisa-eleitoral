@@ -12,6 +12,8 @@
 #include <string>
 
 
+namespace pesquisae::core::database {
+
 struct Result {
     int         id           = 0;
     std::string date;        
@@ -19,3 +21,5 @@ struct Result {
     int         votes        = 0;
     int         candidate_id = 0;
 };
+
+} // namespace pesquisae::core::database

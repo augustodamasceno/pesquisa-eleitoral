@@ -56,10 +56,10 @@ protected:
 };
 
 TEST_F(VoteRepositoryTest, InsertAndFindById) {
-    VoteRepository repo(*db);
+    pesquisae::core::database::VoteRepository repo(*db);
     repo.insert({1, "2026-02-01", 1, 1});
 
-    Vote found = repo.find_by_id(1);
+    pesquisae::core::database::Vote found = repo.find_by_id(1);
     EXPECT_EQ(found.id,           1);
     EXPECT_EQ(found.date,         "2026-02-01");
     EXPECT_EQ(found.city_id,      1);
@@ -67,18 +67,18 @@ TEST_F(VoteRepositoryTest, InsertAndFindById) {
 }
 
 TEST_F(VoteRepositoryTest, Update) {
-    VoteRepository repo(*db);
+    pesquisae::core::database::VoteRepository repo(*db);
     repo.insert({1, "2026-02-01", 1, 1});
     repo.update({1, "2026-02-02", 2, 2});
 
-    Vote found = repo.find_by_id(1);
+    pesquisae::core::database::Vote found = repo.find_by_id(1);
     EXPECT_EQ(found.date,         "2026-02-02");
     EXPECT_EQ(found.city_id,      2);
     EXPECT_EQ(found.candidate_id, 2);
 }
 
 TEST_F(VoteRepositoryTest, FindAll) {
-    VoteRepository repo(*db);
+    pesquisae::core::database::VoteRepository repo(*db);
     repo.insert({1, "2026-02-01", 1, 1});
     repo.insert({2, "2026-02-01", 2, 2});
     repo.insert({3, "2026-02-01", 1, 2});
@@ -88,7 +88,7 @@ TEST_F(VoteRepositoryTest, FindAll) {
 }
 
 TEST_F(VoteRepositoryTest, Remove) {
-    VoteRepository repo(*db);
+    pesquisae::core::database::VoteRepository repo(*db);
     repo.insert({1, "2026-02-01", 1, 1});
     repo.remove(1);
 
@@ -96,18 +96,18 @@ TEST_F(VoteRepositoryTest, Remove) {
 }
 
 TEST_F(VoteRepositoryTest, FindByIdNotFound) {
-    VoteRepository repo(*db);
+    pesquisae::core::database::VoteRepository repo(*db);
     EXPECT_THROW(repo.find_by_id(999), std::runtime_error);
 }
 
 TEST_F(VoteRepositoryTest, FindAllEmpty) {
-    VoteRepository repo(*db);
+    pesquisae::core::database::VoteRepository repo(*db);
     auto all = repo.find_all();
     EXPECT_TRUE(all.empty());
 }
 
 TEST_F(VoteRepositoryTest, FindByCandidate) {
-    VoteRepository repo(*db);
+    pesquisae::core::database::VoteRepository repo(*db);
     repo.insert({1, "2026-02-01", 1, 1});
     repo.insert({2, "2026-02-01", 2, 2});
     repo.insert({3, "2026-02-01", 1, 1});
@@ -121,13 +121,13 @@ TEST_F(VoteRepositoryTest, FindByCandidate) {
 }
 
 TEST_F(VoteRepositoryTest, FindByCandidateEmpty) {
-    VoteRepository repo(*db);
+    pesquisae::core::database::VoteRepository repo(*db);
     auto result = repo.find_by_candidate(999);
     EXPECT_TRUE(result.empty());
 }
 
 TEST_F(VoteRepositoryTest, FindByCity) {
-    VoteRepository repo(*db);
+    pesquisae::core::database::VoteRepository repo(*db);
     repo.insert({1, "2026-02-01", 1, 1});
     repo.insert({2, "2026-02-01", 2, 2});
     repo.insert({3, "2026-02-01", 1, 2});
@@ -141,13 +141,13 @@ TEST_F(VoteRepositoryTest, FindByCity) {
 }
 
 TEST_F(VoteRepositoryTest, FindByCityEmpty) {
-    VoteRepository repo(*db);
+    pesquisae::core::database::VoteRepository repo(*db);
     auto result = repo.find_by_city(999);
     EXPECT_TRUE(result.empty());
 }
 
 TEST_F(VoteRepositoryTest, FindByDate) {
-    VoteRepository repo(*db);
+    pesquisae::core::database::VoteRepository repo(*db);
     repo.insert({1, "2026-02-01", 1, 1});
     repo.insert({2, "2026-02-01", 2, 2});
     repo.insert({3, "2026-03-01", 1, 1});
@@ -161,7 +161,7 @@ TEST_F(VoteRepositoryTest, FindByDate) {
 }
 
 TEST_F(VoteRepositoryTest, FindByDateEmpty) {
-    VoteRepository repo(*db);
+    pesquisae::core::database::VoteRepository repo(*db);
     auto result = repo.find_by_date("1991-01-01");
     EXPECT_TRUE(result.empty());
 }

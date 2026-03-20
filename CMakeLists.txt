@@ -27,14 +27,30 @@ set(SQLITECPP_RUN_CPPLINT OFF CACHE BOOL "" FORCE)
 set(SQLITECPP_RUN_CPPCHECK OFF CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(SQLiteCpp)
 
+FetchContent_Declare(
+    cpr
+    GIT_REPOSITORY https://github.com/libcpr/cpr.git
+    GIT_TAG 1.14.2
+)
+set(CPR_USE_SYSTEM_CURL ON CACHE BOOL "" FORCE)
+FetchContent_MakeAvailable(cpr)
+
+FetchContent_Declare(
+    nlohmann_json
+    GIT_REPOSITORY https://github.com/nlohmann/json.git
+    GIT_TAG        v3.12.0
+)
+FetchContent_MakeAvailable(nlohmann_json)
+
 add_library(core STATIC
     src/core/candidate_repository.cpp
     src/core/city_repository.cpp
     src/core/result_repository.cpp
     src/core/vote_repository.cpp
+    src/core/ibge_demographic.cpp
 )
 target_include_directories(core PUBLIC src/core)
-target_link_libraries(core PUBLIC SQLiteCpp)
+target_link_libraries(core PUBLIC SQLiteCpp cpr::cpr nlohmann_json::nlohmann_json)
 
 option(BUILD_TESTS "Build unit tests" ON)
 if(BUILD_TESTS)

@@ -12,6 +12,8 @@
 
 #include <stdexcept>
 
+namespace pesquisae::core::database {
+
 void ResultRepository::insert(const Result& r) {
     SQLite::Statement q(_db,
         "INSERT INTO result (date, position, votes, candidate_id) VALUES (?, ?, ?, ?)");
@@ -82,3 +84,5 @@ void ResultRepository::remove(int id) {
     q.bind(1, id);
     q.exec();
 }
+
+} // namespace pesquisae::core::database

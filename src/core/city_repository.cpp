@@ -12,6 +12,8 @@
 
 #include <stdexcept>
 
+namespace pesquisae::core::database {
+
 void CityRepository::insert(const City& c) {
     SQLite::Statement q(_db,
         "INSERT INTO city (state, name, tier) VALUES (?, ?, ?)");
@@ -67,3 +69,25 @@ void CityRepository::remove(int id) {
     q.bind(1, id);
     q.exec();
 }
+
+void CityRepository::upsert_all(const std::vector<City>& cities) {
+    auto population_to_tier = [](int pop) noexcept {
+        return 1 + (pop > 20000) + (pop > 100000) + (pop > 1000000);
+    };
+    (void)population_to_tier;
+
+    SQLite::Transaction tx(_db);
+    SQLite::Statement q(_db,
+        "INSERT INTO city (state, name, tier) VALUES (?, ?, ?)"
+        " ON CONFLICT(state, name) DO UPDATE SET tier = excluded.tier");
+    for (const auto& c : cities) {
+        q.bind(1, c.state);
+        q.bind(2, c.name);
+        q.bind(3, c.tier);
+        q.exec();
+        q.reset();
+    }
+    tx.commit();
+}
+
+} // namespace pesquisae::core::database

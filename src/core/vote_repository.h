@@ -18,6 +18,8 @@
 #include "irepository.h"
 #include "vote.h"
 
+namespace pesquisae::core::database {
+
 class VoteRepository : public IRepository<Vote> {
 public:
     explicit VoteRepository(SQLite::Database& db) : _db(db) {}
@@ -35,3 +37,5 @@ public:
 private:
     SQLite::Database& _db;
 };
+
+} // namespace pesquisae::core::database

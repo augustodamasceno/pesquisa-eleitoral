@@ -12,8 +12,12 @@
 #include <string>
 
 
+namespace pesquisae::core::database {
+
 struct Candidate {
     int         id    = 0;
     std::string name;        // VARCHAR(128)
     std::string party;       // VARCHAR(32)
 };
+
+} // namespace pesquisae::core::database

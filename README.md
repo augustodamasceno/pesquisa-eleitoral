@@ -63,15 +63,42 @@ Teste técnico abordando conhecimentos em C++
 ## Stack
 
 * Core: C++17
-* Banco de Dados: SQLiteCpp
-* Testes: GoogleTest
+* Banco de Dados: SQLiteCpp v3.3.3  
+* libcpr v1.14.2  
+* nlohmann/json v3.12.0
+* Testes: GoogleTest v1.17.0  
 * Interface Gráfica: Qt6
+* HTTP: cpr  
 
 ## Banco de Dados
 
-### Schema
-
+### Schema  
+> Visualização no DBeaver  
 ![Schema visualizado com DBeaver](docs/img/db-schema.png)
+
+## Base Demográfica  
+
+* ### [IBGE](https://servicodados.ibge.gov.br/api/docs/)
+
+* ### [Endpoint](https://servicodados.ibge.gov.br/api/v3/agregados/4714/periodos/2022/variaveis/93?localidades=N6[all])  
+  * [Tabela 4714](https://sidra.ibge.gov.br/tabela/4714) - População Residente, Área territorial e Densidade demográfica.  
+  * Censo 2022  
+  * População Residente: Variável 93  
+  * Nível geográfico 6: Municípios   
+
+* ### Endpoint no Teste Unitário    
+  * [8 cidades](https://servicodados.ibge.gov.br/api/v3/agregados/4714/periodos/2022/variaveis/93?localidades=N6[2404002,2400109,2402006,2409407,2403251,3549904,2408102,3550308])  
+
+| City                | State | Population (2022) | Tier |
+|---------------------|-------|-------------------|------|
+| Frutuoso Gomes      | RN    | 4,122             | 1    |
+| Acari               | RN    | 10,597            | 1    |
+| Caicó               | RN    | 61,146            | 2    |
+| Pau dos Ferros      | RN    | 30,479            | 2    |
+| Parnamirim          | RN    | 252,716           | 3    |
+| São José dos Campos | SP    | 697,054           | 3    |
+| Natal               | RN    | 751,300           | 3    |
+| São Paulo           | SP    | 11,451,999        | 4    |
 
 ## Installation
 
@@ -84,11 +111,13 @@ Teste técnico abordando conhecimentos em C++
 2. Launch the **MSYS2 UCRT64** terminal from the Windows Start Menu.  
    ![](https://www.msys2.org/docs/ucrt64.png)
 
-3. Install gcc, cmake, and ninja:
+3. Install gcc, cmake, ninja, curl, and ca-certificates:
 
 ```bash
 pacman -S --needed base-devel mingw-w64-ucrt-x86_64-toolchain
 pacman -S mingw-w64-ucrt-x86_64-cmake mingw-w64-ucrt-x86_64-ninja
+pacman -S mingw-w64-ucrt-x86_64-curl
+pacman -S mingw-w64-ucrt-x86_64-ca-certificates
 ```
 
 #### Build

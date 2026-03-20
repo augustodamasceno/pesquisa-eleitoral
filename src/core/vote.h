@@ -12,9 +12,13 @@
 #include <string>
 
 
+namespace pesquisae::core::database {
+
 struct Vote {
     int         id           = 0;
     std::string date;        
     int         city_id      = 0;
     int         candidate_id = 0;
 };
+
+} // namespace pesquisae::core::database

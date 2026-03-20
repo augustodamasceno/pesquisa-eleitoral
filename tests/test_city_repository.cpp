@@ -37,11 +37,11 @@ protected:
 };
 
 TEST_F(CityRepositoryTest, InsertAndFindById) {
-    CityRepository repo(*db);
+    pesquisae::core::database::CityRepository repo(*db);
     repo.insert({0, "SP", "São José dos Campos", 3});
     int id = static_cast<int>(db->getLastInsertRowid());
 
-    City found = repo.find_by_id(id);
+    pesquisae::core::database::City found = repo.find_by_id(id);
     EXPECT_EQ(found.id,    id);
     EXPECT_EQ(found.state, "SP");
     EXPECT_EQ(found.name,  "São José dos Campos");
@@ -49,19 +49,19 @@ TEST_F(CityRepositoryTest, InsertAndFindById) {
 }
 
 TEST_F(CityRepositoryTest, Update) {
-    CityRepository repo(*db);
+    pesquisae::core::database::CityRepository repo(*db);
     repo.insert({0, "SP", "São José dos Campos", 3});
     int id = static_cast<int>(db->getLastInsertRowid());
 
     repo.update({id, "SP", "São José dos Campos Updated", 4});
 
-    City found = repo.find_by_id(id);
+    pesquisae::core::database::City found = repo.find_by_id(id);
     EXPECT_EQ(found.name, "São José dos Campos Updated");
     EXPECT_EQ(found.tier, 4);
 }
 
 TEST_F(CityRepositoryTest, FindAll) {
-    CityRepository repo(*db);
+    pesquisae::core::database::CityRepository repo(*db);
     repo.insert({0, "SP", "São José dos Campos", 4});
     repo.insert({0, "RN", "Natal", 4});
 
@@ -70,7 +70,7 @@ TEST_F(CityRepositoryTest, FindAll) {
 }
 
 TEST_F(CityRepositoryTest, Remove) {
-    CityRepository repo(*db);
+    pesquisae::core::database::CityRepository repo(*db);
     repo.insert({0, "SP", "São José dos Campos", 3});
     int id = static_cast<int>(db->getLastInsertRowid());
     repo.remove(id);
@@ -79,18 +79,18 @@ TEST_F(CityRepositoryTest, Remove) {
 }
 
 TEST_F(CityRepositoryTest, FindByIdNotFound) {
-    CityRepository repo(*db);
+    pesquisae::core::database::CityRepository repo(*db);
     EXPECT_THROW(repo.find_by_id(999), std::runtime_error);
 }
 
 TEST_F(CityRepositoryTest, FindAllEmpty) {
-    CityRepository repo(*db);
+    pesquisae::core::database::CityRepository repo(*db);
     auto all = repo.find_all();
     EXPECT_TRUE(all.empty());
 }
 
 TEST_F(CityRepositoryTest, FindByState) {
-    CityRepository repo(*db);
+    pesquisae::core::database::CityRepository repo(*db);
     repo.insert({0, "SP", "São José dos Campos", 4});
     repo.insert({0, "RN", "Natal", 4});
 
@@ -103,7 +103,7 @@ TEST_F(CityRepositoryTest, FindByState) {
 }
 
 TEST_F(CityRepositoryTest, FindByStateEmpty) {
-    CityRepository repo(*db);
+    pesquisae::core::database::CityRepository repo(*db);
     auto result = repo.find_by_state("AB");
     EXPECT_TRUE(result.empty());
 }

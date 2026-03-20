@@ -35,27 +35,27 @@ protected:
 };
 
 TEST_F(CandidateRepositoryTest, InsertAndFindById) {
-    CandidateRepository repo(*db);
+    pesquisae::core::database::CandidateRepository repo(*db);
     repo.insert({1, "Candidate1", "P1"});
 
-    Candidate found = repo.find_by_id(1);
+    pesquisae::core::database::Candidate found = repo.find_by_id(1);
     EXPECT_EQ(found.id,    1);
     EXPECT_EQ(found.name,  "Candidate1");
     EXPECT_EQ(found.party, "P1");
 }
 
 TEST_F(CandidateRepositoryTest, Update) {
-    CandidateRepository repo(*db);
+    pesquisae::core::database::CandidateRepository repo(*db);
     repo.insert({1, "Candidate1", "P1"});
     repo.update({1, "Candidate1 Updated", "P2"});
 
-    Candidate found = repo.find_by_id(1);
+    pesquisae::core::database::Candidate found = repo.find_by_id(1);
     EXPECT_EQ(found.name,  "Candidate1 Updated");
     EXPECT_EQ(found.party, "P2");
 }
 
 TEST_F(CandidateRepositoryTest, FindAll) {
-    CandidateRepository repo(*db);
+    pesquisae::core::database::CandidateRepository repo(*db);
     repo.insert({1, "Candidate1", "P1"});
     repo.insert({2, "Candidate2", "P2"});
     repo.insert({3, "Candidate3", "P1"});
@@ -65,7 +65,7 @@ TEST_F(CandidateRepositoryTest, FindAll) {
 }
 
 TEST_F(CandidateRepositoryTest, Remove) {
-    CandidateRepository repo(*db);
+    pesquisae::core::database::CandidateRepository repo(*db);
     repo.insert({1, "Candidate1", "P1"});
     repo.remove(1);
 
@@ -73,18 +73,18 @@ TEST_F(CandidateRepositoryTest, Remove) {
 }
 
 TEST_F(CandidateRepositoryTest, FindByIdNotFound) {
-    CandidateRepository repo(*db);
+    pesquisae::core::database::CandidateRepository repo(*db);
     EXPECT_THROW(repo.find_by_id(999), std::runtime_error);
 }
 
 TEST_F(CandidateRepositoryTest, FindAllEmpty) {
-    CandidateRepository repo(*db);
+    pesquisae::core::database::CandidateRepository repo(*db);
     auto all = repo.find_all();
     EXPECT_TRUE(all.empty());
 }
 
 TEST_F(CandidateRepositoryTest, FindByParty) {
-    CandidateRepository repo(*db);
+    pesquisae::core::database::CandidateRepository repo(*db);
     repo.insert({1, "Candidate 1", "P1"});
     repo.insert({2, "Candidate 2", "P2"});
     repo.insert({3, "Candidate 3", "P1"});
@@ -98,7 +98,7 @@ TEST_F(CandidateRepositoryTest, FindByParty) {
 }
 
 TEST_F(CandidateRepositoryTest, FindByPartyEmpty) {
-    CandidateRepository repo(*db);
+    pesquisae::core::database::CandidateRepository repo(*db);
     auto result = repo.find_by_party("Nonexistent");
     EXPECT_TRUE(result.empty());
 }

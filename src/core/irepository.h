@@ -12,6 +12,8 @@
 
 #include <vector>
 
+namespace pesquisae::core::database {
+
 template <typename T>
 class IRepository {
 public:
@@ -24,3 +26,5 @@ public:
     virtual void           remove(int id)           = 0;
 
 };
+
+} // namespace pesquisae::core::database

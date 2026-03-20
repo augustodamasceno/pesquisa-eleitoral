@@ -48,6 +48,8 @@ add_library(core STATIC
     src/core/result_repository.cpp
     src/core/vote_repository.cpp
     src/core/ibge_demographic.cpp
+    src/core/vote_intention.cpp
+    src/core/poll_parser.cpp
 )
 target_include_directories(core PUBLIC src/core)
 target_link_libraries(core PUBLIC SQLiteCpp cpr::cpr nlohmann_json::nlohmann_json)

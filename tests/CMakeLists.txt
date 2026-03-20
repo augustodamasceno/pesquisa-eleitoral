@@ -28,3 +28,10 @@ add_repo_test(test_result       test_result_repository.cpp)
 add_repo_test(test_vote         test_vote_repository.cpp)
 add_repo_test(test_ibge         test_ibge_demographic.cpp)
 add_repo_test(test_integration_ibge_database_update  test_integration_ibge_database_update.cpp)
+
+add_executable(test_poll_parser test_poll_parser.cpp)
+target_link_libraries(test_poll_parser PRIVATE core GTest::gtest_main)
+target_compile_definitions(test_poll_parser PRIVATE
+    TEST_RESOURCES_DIR="${CMAKE_CURRENT_SOURCE_DIR}/resources"
+)
+add_test(NAME test_poll_parser COMMAND test_poll_parser)

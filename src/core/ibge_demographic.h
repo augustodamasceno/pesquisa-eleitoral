@@ -17,7 +17,7 @@
 
 namespace pesquisae::core::database {
 
-static constexpr std::string_view IBGE_API_URL =
+inline constexpr std::string_view IBGE_API_URL =
 "https://servicodados.ibge.gov.br/api/v3/agregados/4714/periodos/2022/variaveis/93?localidades=N6[all]";
 
 struct IBGEFetchResult {

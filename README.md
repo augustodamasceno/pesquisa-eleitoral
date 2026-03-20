@@ -76,6 +76,10 @@ Teste técnico abordando conhecimentos em C++
 > Visualização no DBeaver  
 ![Schema visualizado com DBeaver](docs/img/db-schema.png)
 
+### Tabela City Após Atualização Automática  
+![Tabela City](docs/img/db-city1.jpg)  
+![Tabela City](docs/img/db-city2.jpg)  
+
 ## Base Demográfica  
 
 * ### [IBGE](https://servicodados.ibge.gov.br/api/docs/)

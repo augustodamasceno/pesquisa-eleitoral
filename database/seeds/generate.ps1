@@ -5,7 +5,7 @@ $schema  = Join-Path $dir '..\schema\tables'
 $seed    = Join-Path $dir 'seed.sql'
 $db      = Join-Path $dir 'seed.db'
 
-$tables = @('city', 'candidate', 'vote', 'result')
+$tables = @('city', 'candidate', 'vote', 'result', 'log')
 
 $lines = [System.Collections.Generic.List[string]]::new()
 

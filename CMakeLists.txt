@@ -45,6 +45,7 @@ FetchContent_MakeAvailable(nlohmann_json)
 add_library(core STATIC
     src/core/candidate_repository.cpp
     src/core/city_repository.cpp
+    src/core/log_repository.cpp
     src/core/result_repository.cpp
     src/core/result_processor.cpp
     src/core/vote_repository.cpp
@@ -59,4 +60,9 @@ option(BUILD_TESTS "Build unit tests" ON)
 if(BUILD_TESTS)
     enable_testing()
     add_subdirectory(tests)
+endif()
+
+option(BUILD_UI "Build Qt UI" OFF)
+if(BUILD_UI)
+    add_subdirectory(src/ui)
 endif()

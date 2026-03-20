@@ -1,0 +1,33 @@
+/*
+ * Pesquisa Eleitoral - Ui Main File
+ * Copyright (c) 2026, Augusto Damasceno.
+ * All rights reserved.
+ *
+ * SPDX-License-Identifier: BSD-2-Clause
+ *
+ * See https://github.com/augustodamasceno/pesquisa-eleitoral
+ */
+
+#include "mainwindow.h"
+
+#include <QApplication>
+#include <QLocale>
+#include <QTranslator>
+
+int main(int argc, char *argv[])
+{
+    QApplication a(argc, argv);
+
+    QTranslator translator;
+    const QStringList uiLanguages = QLocale::system().uiLanguages();
+    for (const QString &locale : uiLanguages) {
+        const QString baseName = "ui_" + QLocale(locale).name();
+        if (translator.load(":/i18n/" + baseName)) {
+            a.installTranslator(&translator);
+            break;
+        }
+    }
+    MainWindow w;
+    w.show();
+    return a.exec();
+}

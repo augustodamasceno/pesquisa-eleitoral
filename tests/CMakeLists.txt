@@ -24,6 +24,7 @@ endfunction()
 
 add_repo_test(test_candidate          test_candidate_repository.cpp)
 add_repo_test(test_city               test_city_repository.cpp)
+add_repo_test(test_log                test_log_repository.cpp)
 add_repo_test(test_result             test_result_repository.cpp)
 add_repo_test(test_vote               test_vote_repository.cpp)
 add_repo_test(test_ibge               test_ibge_demographic.cpp)

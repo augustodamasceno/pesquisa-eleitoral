@@ -1,0 +1,120 @@
+1
+2026-04-01
+Tiradentes
+MG
+1
+2
+2026-04-01
+Tiradentes
+MG
+2
+3
+2026-04-01
+Alto Paraíso de Goiás
+GO
+1
+4
+2026-04-01
+Mucugê
+BA
+2
+5
+2026-04-01
+Senhor do Bonfim
+BA
+1
+6
+2026-04-01
+Senhor do Bonfim
+BA
+2
+7
+2026-04-01
+Russas
+CE
+1
+8
+2026-04-01
+Russas
+CE
+2
+9
+2026-04-01
+Natal
+RN
+1
+10
+2026-04-01
+Natal
+RN
+2
+11
+2026-04-01
+Natal
+RN
+2
+12
+2026-04-01
+Aracaju
+SE
+1
+13
+2026-04-01
+Aracaju
+SE
+2
+14
+2026-04-01
+João Pessoa
+PB
+1
+15
+2026-04-01
+Campo Grande
+MS
+1
+16
+2026-04-01
+Campo Grande
+MS
+2
+17
+2026-04-01
+São Paulo
+SP
+1
+18
+2026-04-01
+São Paulo
+SP
+1
+19
+2026-04-01
+São Paulo
+SP
+2
+20
+2026-04-01
+Rio de Janeiro
+RJ
+2
+21
+2026-04-01
+Rio de Janeiro
+RJ
+2
+22
+2026-04-01
+Rio de Janeiro
+RJ
+1
+23
+2026-04-01
+Brasília
+DF
+2
+24
+2026-04-01
+Manaus
+AM
+1

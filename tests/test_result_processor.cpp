@@ -15,10 +15,6 @@
 #include <SQLiteCpp/SQLiteCpp.h>
 
 #include "result_processor.h"
-#include "candidate_repository.h"
-#include "city_repository.h"
-#include "result_repository.h"
-#include "vote_repository.h"
 #include "database_context.h"
 #include "vote_intention.h"
 
@@ -72,21 +68,12 @@ static std::unique_ptr<SQLite::Database> make_db()
 
 class ResultProcessorTest : public ::testing::Test {
 protected:
-    std::unique_ptr<SQLite::Database>                 db;
-    std::unique_ptr<pesquisae::core::database::CandidateRepository> candidates;
-    std::unique_ptr<pesquisae::core::database::CityRepository>      cities;
-    std::unique_ptr<pesquisae::core::database::ResultRepository>    results;
-    std::unique_ptr<pesquisae::core::database::VoteRepository>      votes;
-    std::unique_ptr<pesquisae::core::database::DatabaseContext>     ctx;
+    std::unique_ptr<SQLite::Database>                             db;
+    std::unique_ptr<pesquisae::core::database::DatabaseContext>  ctx;
 
     void SetUp() override {
-        db         = make_db();
-        candidates = std::make_unique<pesquisae::core::database::CandidateRepository>(*db);
-        cities     = std::make_unique<pesquisae::core::database::CityRepository>(*db);
-        results    = std::make_unique<pesquisae::core::database::ResultRepository>(*db);
-        votes      = std::make_unique<pesquisae::core::database::VoteRepository>(*db);
-        ctx        = std::make_unique<pesquisae::core::database::DatabaseContext>(
-                         *db, *candidates, *cities, *results, *votes);
+        db  = make_db();
+        ctx = std::make_unique<pesquisae::core::database::DatabaseContext>(*db);
     }
 };
 
@@ -114,7 +101,7 @@ TEST_F(ResultProcessorTest, WeightedRankingFavorsMetroCandidate) {
 
     pesquisae::core::poll::ResultProcessor proc(vis, *ctx);
 
-    auto all = results->find_by_date("2026-10-05");
+    auto all = ctx->get_results().find_by_date("2026-10-05");
     ASSERT_EQ(all.size(), 2u);
 
     EXPECT_EQ(all[0].position,     1);
@@ -138,7 +125,7 @@ TEST_F(ResultProcessorTest, SingleCandidateSingleTier) {
 
     pesquisae::core::poll::ResultProcessor proc(vis, *ctx);
 
-    auto all = results->find_by_date("2026-10-05");
+    auto all = ctx->get_results().find_by_date("2026-10-05");
     ASSERT_EQ(all.size(), 1u);
     EXPECT_EQ(all[0].position,     1);
     EXPECT_EQ(all[0].candidate_id, 7);
@@ -148,7 +135,7 @@ TEST_F(ResultProcessorTest, SingleCandidateSingleTier) {
 
 TEST_F(ResultProcessorTest, EmptyInputProducesNoResults) {
     pesquisae::core::poll::ResultProcessor proc({}, *ctx);
-    EXPECT_TRUE(results->find_all().empty());
+    EXPECT_TRUE(ctx->get_results().find_all().empty());
 }
 
 TEST_F(ResultProcessorTest, VotesArePersistedToVoteTable) {
@@ -160,6 +147,6 @@ TEST_F(ResultProcessorTest, VotesArePersistedToVoteTable) {
 
     pesquisae::core::poll::ResultProcessor proc(vis, *ctx);
 
-    auto all_votes = votes->find_all();
+    auto all_votes = ctx->get_votes().find_all();
     EXPECT_EQ(all_votes.size(), 2u);
 }

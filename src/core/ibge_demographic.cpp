@@ -58,11 +58,17 @@ std::vector<City> ibge_parse_cities(const IBGEFetchResult& result){
             const std::string pop_str = s["serie"]["2022"].get<std::string>();
 
             City city;
-            const auto open  = nome.rfind('(');
-            const auto close = nome.rfind(')');
-            if (open != std::string::npos && close > open) {
-                city.state = nome.substr(open + 1, close - open - 1);
-                city.name  = nome.substr(0, open > 0 ? open - 1 : open);
+            // IBGE format A: "City Name - ST"
+            // IBGE format B: "City Name (ST)"
+            const auto paren_open  = nome.rfind('(');
+            const auto paren_close = nome.rfind(')');
+            const auto dash        = nome.rfind(" - ");
+            if (paren_open != std::string::npos && paren_close > paren_open) {
+                city.state = nome.substr(paren_open + 1, paren_close - paren_open - 1);
+                city.name  = nome.substr(0, paren_open > 0 ? paren_open - 1 : paren_open);
+            } else if (dash != std::string::npos) {
+                city.name  = nome.substr(0, dash);
+                city.state = nome.substr(dash + 3);
             } else {
                 city.name = nome;
             }

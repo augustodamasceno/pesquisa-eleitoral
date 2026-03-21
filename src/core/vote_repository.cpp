@@ -92,4 +92,10 @@ void VoteRepository::remove(int id) {
     q.exec();
 }
 
+void VoteRepository::remove_by_date(const std::string& date) {
+    SQLite::Statement q(_db, "DELETE FROM vote WHERE date = ?");
+    q.bind(1, date);
+    q.exec();
+}
+
 } // namespace pesquisae::core::database

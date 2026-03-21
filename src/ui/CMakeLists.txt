@@ -29,12 +29,15 @@ FetchContent_Declare(
     GIT_REPOSITORY https://github.com/libcpr/cpr.git
     GIT_TAG        1.10.5
 )
+
 set(CPR_USE_SYSTEM_CURL OFF CACHE BOOL "" FORCE)
-# Disable all compression libs so bundled curl won't advertise encodings
-# it can't decode (brotli/zstd/gzip), avoiding "Unrecognized content encoding" errors.
-set(CURL_ZLIB   OFF CACHE BOOL "" FORCE)
+set(CURL_ZLIB   ON  CACHE BOOL "" FORCE)
 set(CURL_BROTLI OFF CACHE BOOL "" FORCE)
 set(CURL_ZSTD   OFF CACHE BOOL "" FORCE)
+set(ZLIB_INCLUDE_DIR "C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include"
+    CACHE PATH "" FORCE)
+set(ZLIB_LIBRARY "C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/lib/libz.a"
+    CACHE FILEPATH "" FORCE)
 FetchContent_MakeAvailable(cpr)
 
 FetchContent_Declare(
@@ -70,6 +73,7 @@ qt_add_executable(ui
     mainwindow.cpp
     mainwindow.h
     mainwindow.ui
+    resources.qrc
 )
 
 qt_add_translations(

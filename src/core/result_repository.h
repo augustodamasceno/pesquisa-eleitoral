@@ -32,6 +32,7 @@ public:
 
     std::vector<Result> find_by_date(const std::string& date);
     std::vector<Result> find_by_candidate(int candidate_id);
+    void remove_by_date(const std::string& date);
 
 private:
     SQLite::Database& _db;

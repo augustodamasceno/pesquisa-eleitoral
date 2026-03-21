@@ -1,6 +1,7 @@
 build/
 .vscode/
 .qtcreator/
+.cache/
 
 # SQLite
 database/seeds/seed.db

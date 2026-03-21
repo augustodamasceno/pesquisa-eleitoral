@@ -67,8 +67,7 @@ Teste técnico abordando conhecimentos em C++
 * libcpr v1.14.2  
 * nlohmann/json v3.12.0
 * Testes: GoogleTest v1.17.0  
-* Interface Gráfica: Qt6
-* HTTP: cpr  
+* Interface Gráfica: Qt6  
 
 ## Banco de Dados
 
@@ -124,9 +123,46 @@ pacman -S mingw-w64-ucrt-x86_64-curl
 pacman -S mingw-w64-ucrt-x86_64-ca-certificates
 ```
 
-#### Build
+#### Build Core
 
 ```powershell
 C:/msys64/ucrt64/bin/cmake.exe -B build
 C:/msys64/ucrt64/bin/cmake.exe --build build --config Debug --target all
+```
+
+#### Run Tests (Core)
+
+```powershell
+C:/msys64/ucrt64/bin/ctest.exe --test-dir build --output-on-failure
+```
+
+#### Install Dependencies and Seed Database
+
+Run the PowerShell install script from the repository root:
+
+```powershell
+.\install.ps1
+```
+
+The script will:
+1. Set up vcpkg and install `sqlite3` / `sqlitecpp`
+2. Generate the seed database and copy it to `$HOME\pesquisa-eleitoral\database.db`
+
+#### Build Qt UI
+
+> **Prerequisites:** Qt 6.5+ installed via the Qt online installer to `C:\Qt\`, with the MinGW 64-bit kit (`mingw_64`) and the CMake component.
+
+**Option A — Qt Creator (recommended)**
+
+1. Open Qt Creator.
+2. Go to File > Open File and select `src/ui/CMakeLists.txt`.
+3. Select the Desktop Qt MinGW 64-bit kit and click Configure Project.
+4. Click Run to build and launch the application.
+
+**Option B — Command line**
+
+```powershell
+C:/Qt/Tools/CMake_64/bin/cmake.exe -S src/ui -B src/ui/build -G "MinGW Makefiles" -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH=C:/Qt/<QT-VERSION>/mingw_64
+C:/Qt/Tools/CMake_64/bin/cmake.exe --build src/ui/build --config Release --parallel
+src/ui/build/ui.exe
 ```

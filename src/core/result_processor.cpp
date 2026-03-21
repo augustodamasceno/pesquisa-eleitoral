@@ -21,8 +21,18 @@ namespace pesquisae::core::poll {
 
 ResultProcessor::ResultProcessor(const std::vector<VoteIntention>& vote_intentions, 
                                  const pesquisae::core::database::DatabaseContext& db_context)
-    : _db_context(db_context)
+    : _db_context(db_context), votes_by_tier{}
 {
+    if (!vote_intentions.empty())
+        _date = vote_intentions.front().get_date();
+        
+    // Remove any existing data for this poll's date to ensure idempotent loading
+    if (!vote_intentions.empty()) {
+        const std::string& date = vote_intentions.front().get_date();
+        _db_context.get_results().remove_by_date(date);
+        _db_context.get_votes().remove_by_date(date);
+    }
+
     // Organize data and update database
     for (const auto& vi : vote_intentions){
         int tier = this->city_tier(vi.get_state(), vi.get_city());
@@ -37,7 +47,11 @@ ResultProcessor::ResultProcessor(const std::vector<VoteIntention>& vote_intentio
         pesquisae::core::database::Vote v;
         v.id = 0;
         v.date = vi.get_date();
-        v.city_id = this->_db_context.get_cities().find_by_state_and_name(vi.get_state(), vi.get_city()).id;
+        int city_id = 0;
+        try {
+            city_id = this->_db_context.get_cities().find_by_state_and_name(vi.get_state(), vi.get_city()).id;
+        } catch (const std::exception&) {}
+        v.city_id = city_id;
         v.candidate_id = vi.get_candidate_id();
         this->_db_context.get_votes().insert(v);
     }
@@ -104,8 +118,10 @@ bool ResultProcessor::update_counts(const VoteIntention& vi, int tier){
 
 
 int ResultProcessor::city_tier(const std::string& state, const std::string& city) {
-    auto city_obj = _db_context.get_cities().find_by_state_and_name(state, city);
-    return city_obj.tier;
+    try {
+        return _db_context.get_cities().find_by_state_and_name(state, city).tier;
+    } catch (const std::exception&) {}
+    return 1;
 }
 
 } // namespace pesquisae::core::poll

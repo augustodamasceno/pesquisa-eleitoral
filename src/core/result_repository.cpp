@@ -87,4 +87,10 @@ void ResultRepository::remove(int id) {
     q.exec();
 }
 
+void ResultRepository::remove_by_date(const std::string& date) {
+    SQLite::Statement q(_db, "DELETE FROM result WHERE date = ?");
+    q.bind(1, date);
+    q.exec();
+}
+
 } // namespace pesquisae::core::database

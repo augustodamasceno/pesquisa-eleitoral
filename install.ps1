@@ -19,7 +19,7 @@ if (-not (Test-Path $buildDir)) {
     Write-Host "build directory already exists, skipping." -ForegroundColor Yellow
 }
 
-# Clone vcpkg  
+
 if (-not (Test-Path $vcpkgDir)) {
     Write-Host "Cloning vcpkg..." -ForegroundColor Cyan
     git clone https://github.com/microsoft/vcpkg.git $vcpkgDir
@@ -27,7 +27,6 @@ if (-not (Test-Path $vcpkgDir)) {
     Write-Host "vcpkg directory already exists, skipping clone." -ForegroundColor Yellow
 }
 
-# vcpkg installations
 Push-Location $vcpkgDir
 try {
     if (-not (Test-Path ".\vcpkg.exe")) {
@@ -49,8 +48,6 @@ try {
     Pop-Location
 }
 
-# Create app data folder and copy initial database
-$appDataDir = "$HOME\pesquisa-eleitoral"
 Write-Host "Creating app data directory at $appDataDir..." -ForegroundColor Cyan
 if (-not (Test-Path $appDataDir)) {
     New-Item -ItemType Directory -Path $appDataDir | Out-Null
@@ -58,10 +55,6 @@ if (-not (Test-Path $appDataDir)) {
     Write-Host "Directory already exists, skipping." -ForegroundColor Yellow
 }
 
-$seedSource = "$PSScriptRoot\database\seeds\seed.db"
-$dbDest     = "$appDataDir\database.db"
-
-# Generate seed database
 Write-Host "Generating seed database..." -ForegroundColor Cyan
 Push-Location "$PSScriptRoot\database\seeds"
 try {
@@ -70,8 +63,21 @@ try {
     Pop-Location
 }
 
+$seedSource = "$PSScriptRoot\database\seeds\seed.db"
+$dbDest     = "$appDataDir\database.db"
 Write-Host "Copying seed database to $dbDest..." -ForegroundColor Cyan
 Copy-Item -Path $seedSource -Destination $dbDest -Force
 
-Write-Host ""
-Write-Host "All dependencies installed successfully." -ForegroundColor Green
+Write-Host "Configuring Qt UI build..." -ForegroundColor Cyan
+$env:PATH = "$qtMingwBin;$env:PATH"
+
+& $qtCmake -S $uiSrcDir -B $uiBuildDir `
+    -G "MinGW Makefiles" `
+    -DCMAKE_BUILD_TYPE=Release `
+    "-DCMAKE_PREFIX_PATH=$qtMingwDir"
+if ($LASTEXITCODE -ne 0) { Write-Error "Qt cmake configure failed." }
+
+Write-Host "Building Qt UI..." -ForegroundColor Cyan
+& $qtCmake --build $uiBuildDir --config Release --parallel
+if ($LASTEXITCODE -ne 0) { Write-Error "Qt UI build failed." }
+

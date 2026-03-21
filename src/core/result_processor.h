@@ -29,10 +29,12 @@ public:
                     const pesquisae::core::database::DatabaseContext& db_context);
     bool update_counts(const VoteIntention& vi, int tier); 
     int city_tier(const std::string& state, const std::string& city);
+    const std::string& get_date() const { return _date; }
 private:
     std::unordered_map<int, std::array<int, 4>> votes_by_candidate;
     std::array<int, 4> votes_by_tier;
     const pesquisae::core::database::DatabaseContext& _db_context;
+    std::string _date;
 };
 
 } // namespace pesquisae::core::poll

@@ -85,8 +85,12 @@ protected:
 // w3=10000, w4=2850000
 // score_1 = 10000*(2/3) + 2850000*(1/3) =  956666.67
 // score_2 = 10000*(1/3) + 2850000*(2/3) = 1903333.33
-// total   = 2860000.0
-// proportion_2 = 2/3, proportion_1 = 1/3
+// votes_by_tier = [0, 0, 3, 3]
+// w3=550000, w4=2850000
+// score_1 = 550000*(2/3) + 2850000*(1/3) = 3950000/3
+// score_2 = 550000*(1/3) + 2850000*(2/3) = 6250000/3
+// total   = 10200000/3
+// proportion_2 = 6250000/10200000, proportion_1 = 3950000/10200000
 // Candidate 2 ranks 1st.
 TEST_F(ResultProcessorTest, WeightedRankingFavorsMetroCandidate) {
     using VI = pesquisae::core::poll::VoteIntention;
@@ -112,8 +116,8 @@ TEST_F(ResultProcessorTest, WeightedRankingFavorsMetroCandidate) {
     EXPECT_EQ(all[1].candidate_id, 1);
     EXPECT_EQ(all[1].votes,        3);
 
-    EXPECT_NEAR(all[0].proportion, 2.0 / 3.0, 1e-6);
-    EXPECT_NEAR(all[1].proportion, 1.0 / 3.0, 1e-6);
+    EXPECT_NEAR(all[0].proportion, 6250000.0 / 10200000.0, 1e-6);
+    EXPECT_NEAR(all[1].proportion, 3950000.0 / 10200000.0, 1e-6);
 }
 
 TEST_F(ResultProcessorTest, SingleCandidateSingleTier) {

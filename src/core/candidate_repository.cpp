@@ -16,7 +16,7 @@ namespace pesquisae::core::database {
 
 void CandidateRepository::insert(const Candidate& c) {
     SQLite::Statement q(_db,
-        "INSERT INTO candidate (id, name, party) VALUES (?, ?, ?)");
+        "INSERT OR IGNORE INTO candidate (id, name, party) VALUES (?, ?, ?)");
     q.bind(1, c.id);
     q.bind(2, c.name);
     q.bind(3, c.party);

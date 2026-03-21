@@ -11,9 +11,20 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Pesquisa Eleitoral</string>
   </property>
-  <widget class="QWidget" name="centralwidget"/>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QGraphicsView" name="graphicsView">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>0</y>
+      <width>1141</width>
+      <height>811</height>
+     </rect>
+    </property>
+   </widget>
+  </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
@@ -29,16 +40,6 @@
     </property>
     <addaction name="menuLoadPoll"/>
    </widget>
-   <widget class="QMenu" name="menuUpdateDatabase">
-    <property name="title">
-     <string>Atualizar Base Demográfica</string>
-    </property>
-   </widget>
-   <widget class="QMenu" name="menuAbout">
-    <property name="title">
-     <string>Sobre</string>
-    </property>
-   </widget>
    <addaction name="menuFile"/>
    <addaction name="menuUpdateDatabase"/>
    <addaction name="menuAbout"/>
@@ -48,8 +49,44 @@
    <property name="text">
     <string>Carregar Pesquisa</string>
    </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::ApplicationSpecificRole</enum>
+   </property>
+  </action>
+  <action name="menuUpdateDatabase">
+   <property name="text">
+    <string>Atualizar Base Demográfica</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::ApplicationSpecificRole</enum>
+   </property>
+  </action>
+  <action name="menuAbout">
+   <property name="text">
+    <string>Sobre</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::ApplicationSpecificRole</enum>
+   </property>
   </action>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>menubar</sender>
+   <signal>triggered(QAction*)</signal>
+   <receiver>menubar</receiver>
+   <slot>raise()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>25</x>
+     <y>6</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>25</x>
+     <y>6</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

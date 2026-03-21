@@ -33,6 +33,7 @@ public:
     std::vector<Vote> find_by_candidate(int candidate_id);
     std::vector<Vote> find_by_city(int city_id);
     std::vector<Vote> find_by_date(const std::string& date);
+    void remove_by_date(const std::string& date);
 
 private:
     SQLite::Database& _db;

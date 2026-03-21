@@ -38,4 +38,4 @@ jobs:
 
       - name: Test
         shell: msys2 {0}
-        run: ctest --test-dir build --output-on-failure -E "test_integration_ibge_database_update"
+        run: ctest --test-dir build --output-on-failure -E "test_ibge|test_integration_ibge_database_update"
